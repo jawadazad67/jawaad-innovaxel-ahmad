@@ -1,73 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>URL Shortener</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 50px auto;
-    }
-    input, button {
-      padding: 10px;
-      margin-top: 10px;
-      width: 100%;
-    }
-    .result {
-      margin-top: 20px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Minimal URL Shortener</title>
 </head>
 <body>
-  <h2>Shorten Your URL</h2>
+  <h2>Minimal URL Shortener</h2>
+
+  <!-- Create Short URL -->
+  <h3>Create Short URL</h3>
   <form action="/shorten-ui" method="POST">
-    <input type="url" name="url" placeholder="Enter a long URL" required />
+    <input type="url" name="url" placeholder="Enter long URL" required />
     <button type="submit">Shorten</button>
   </form>
 
+  <!-- Update Short URL -->
+  <h3>Update Short URL</h3>
+  <form action="/update-ui" method="POST">
+    <input type="text" name="code" placeholder="Short Code (e.g., abc123)" required />
+    <input type="url" name="url" placeholder="New long URL" required />
+    <button type="submit">Update</button>
+  </form>
+
+  <!-- Delete Short URL -->
+  <h3>Delete Short URL</h3>
+  <form action="/delete-ui" method="POST">
+    <input type="text" name="code" placeholder="Short Code (e.g., abc123)" required />
+    <button type="submit">Delete</button>
+  </form>
+
+  <!-- Get Stats -->
+  <h3>Get URL Stats</h3>
+  <form action="/stats-ui" method="POST">
+    <input type="text" name="code" placeholder="Short Code (e.g., abc123)" required />
+    <button type="submit">Get Stats</button>
+  </form>
+
+  <!-- Retrieve Original URL -->
+  <h3>Retrieve Original URL</h3>
+  <form action="/retrieve-ui" method="POST">
+    <input type="text" name="code" placeholder="Short Code (e.g., abc123)" required />
+    <button type="submit">Get Original URL</button>
+  </form>
+
+  <hr>
+
+  <!-- Result Outputs -->
   <% if (shortUrl) { %>
-    <div class="result">
-      <p><strong>Shortened URL:</strong></p>
-      <a href="<%= shortUrl %>" target="_blank"><%= shortUrl %></a>
-    </div>
+    <p><strong>Shortened URL:</strong> <a href="<%= shortUrl %>" target="_blank"><%= shortUrl %></a></p>
+  <% } %>
+
+  <% if (originalUrl) { %>
+    <p><strong>Original URL:</strong> <a href="<%= originalUrl %>" target="_blank"><%= originalUrl %></a></p>
+  <% } %>
+
+  <% if (stats) { %>
+    <p><strong>Stats for Short Code:</strong></p>
+    <p>Original URL: <%= stats.url %></p>
+    <p>Access Count: <%= stats.accessCount %></p>
+    <p>Created At: <%= stats.createdAt.toISOString() %></p>
+    <p>Updated At: <%= stats.updatedAt.toISOString() %></p>
   <% } %>
 
   <% if (error) { %>
-    <p style="color: red;"><%= error %></p>
+    <p style="color:red;"><%= error %></p>
   <% } %>
-  <hr />
-
-<h3>Update Short URL</h3>
-<form action="/update-ui" method="POST">
-  <input type="text" name="code" placeholder="Short code (e.g., abc123)" required />
-  <input type="url" name="url" placeholder="New long URL" required />
-  <button type="submit">Update</button>
-</form>
-
-<hr />
-
-<h3>Delete Short URL</h3>
-<form action="/delete-ui" method="POST">
-  <input type="text" name="code" placeholder="Short code (e.g., abc123)" required />
-  <button type="submit">Delete</button>
-</form>
-
-<hr />
-
-<h3>Get URL Stats</h3>
-<form action="/stats-ui" method="POST">
-  <input type="text" name="code" placeholder="Short code (e.g., abc123)" required />
-  <button type="submit">Get Stats</button>
-</form>
-
-<% if (stats) { %>
-  <div>
-    <h4>Stats:</h4>
-    <p><strong>Original URL:</strong> <%= stats.url %></p>
-    <p><strong>Access Count:</strong> <%= stats.accessCount %></p>
-  </div>
-<% } %>
-
 </body>
 </html>
-
