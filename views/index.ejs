@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Minimal URL Shortener</title>
-   <style>
+  <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #f7f9fc;
@@ -16,7 +17,8 @@
       background: white;
     }
 
-    h2, h3 {
+    h2,
+    h3 {
       color: #2c3e50;
       margin-bottom: 10px;
     }
@@ -76,6 +78,7 @@
     }
   </style>
 </head>
+
 <body>
   <h2>Minimal URL Shortener</h2>
 
@@ -86,7 +89,6 @@
     <button type="submit">Shorten</button>
   </form>
 
-  <!-- Update Short URL -->
   <h3>Update Short URL</h3>
   <form action="/update-ui" method="POST">
     <input type="text" name="code" placeholder="Short Code (e.g., abc123)" required />
@@ -94,21 +96,20 @@
     <button type="submit">Update</button>
   </form>
 
-  <!-- Delete Short URL -->
+
   <h3>Delete Short URL</h3>
   <form action="/delete-ui" method="POST">
     <input type="text" name="code" placeholder="Short Code (e.g., abc123)" required />
     <button type="submit">Delete</button>
   </form>
 
-  <!-- Get Stats -->
+
   <h3>Get URL Stats</h3>
   <form action="/stats-ui" method="POST">
     <input type="text" name="code" placeholder="Short Code (e.g., abc123)" required />
     <button type="submit">Get Stats</button>
   </form>
 
-  <!-- Retrieve Original URL -->
   <h3>Retrieve Original URL</h3>
   <form action="/retrieve-ui" method="POST">
     <input type="text" name="code" placeholder="Short Code (e.g., abc123)" required />
@@ -117,25 +118,33 @@
 
   <hr>
 
-  <!-- Result Outputs -->
-   <div class="result">
-  <% if (shortUrl) { %>
-    <p><strong>Shortened URL:</strong> <a href="<%= shortUrl %>" target="_blank"><%= shortUrl %></a></p>
-  <% } %>
 
-  <% if (originalUrl) { %>
-    <p><strong>Original URL:</strong> <a href="<%= originalUrl %>" target="_blank"><%= originalUrl %></a></p>
-  <% } %>
+  <div class="result">
+    <% if (shortUrl) { %>
+      <p><strong>Shortened URL:</strong> <a href="<%= shortUrl %>" target="_blank">
+          <%= shortUrl %>
+        </a></p>
+      <% } %>
 
-  <% if (stats) { %>
-    <p><strong>Stats for Short Code:</strong></p>
-    <p>Original URL: <%= stats.url %></p>
-    <p>Access Count: <%= stats.accessCount %></p>
-  <% } %>
+        <% if (originalUrl) { %>
+          <p><strong>Original URL:</strong> <a href="<%= originalUrl %>" target="_blank">
+              <%= originalUrl %>
+            </a></p>
+          <% } %>
 
-  <% if (error) { %>
-    <p style="color:red;"><%= error %></p>
-  <% } %>
+            <% if (stats) { %>
+              <p><strong>Stats for Short Code:</strong></p>
+              <p>Original URL: <%= stats.url %>
+              </p>
+              <p>Access Count: <%= stats.accessCount %>
+              </p>
+              <% } %>
+
+                <% if (error) { %>
+                  <p style="color:red;">
+                    <%= error %>
+                  </p>
+                  <% } %>
   </div>
 </body>
 
