@@ -3,6 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <title>Minimal URL Shortener</title>
+   <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f9fc;
+      color: #333;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      background: white;
+    }
+
+    h2, h3 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    form {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    input[type="text"],
+    input[type="url"] {
+      width: 100%;
+      padding: 8px 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #3498db;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    p {
+      margin: 8px 0;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+
+    .result {
+      padding: 10px;
+      background: #ecf0f1;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
   <h2>Minimal URL Shortener</h2>
@@ -46,6 +118,7 @@
   <hr>
 
   <!-- Result Outputs -->
+   <div class="result">
   <% if (shortUrl) { %>
     <p><strong>Shortened URL:</strong> <a href="<%= shortUrl %>" target="_blank"><%= shortUrl %></a></p>
   <% } %>
@@ -58,12 +131,12 @@
     <p><strong>Stats for Short Code:</strong></p>
     <p>Original URL: <%= stats.url %></p>
     <p>Access Count: <%= stats.accessCount %></p>
-    <p>Created At: <%= stats.createdAt.toISOString() %></p>
-    <p>Updated At: <%= stats.updatedAt.toISOString() %></p>
   <% } %>
 
   <% if (error) { %>
     <p style="color:red;"><%= error %></p>
   <% } %>
+  </div>
 </body>
+
 </html>
